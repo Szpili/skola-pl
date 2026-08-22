@@ -17,8 +17,8 @@
   var ROLES = {
     uczen: {
       track: 'szkola',
-      you: 'Skanujesz kod QR po lekcji i stukasz w jedno pole kwadratu. Bez konta, bez nazwiska, kilka sekund.',
-      then: 'Nauczyciel widzi obrazek klasy, nie Twoje imię. Jedno kliknięcie nic nie znaczy — liczy się, gdy ktoś odpowiada tak samo wiele razy.'
+      you: 'Skanujesz kod QR po lekcji i stukasz jedno z pól kwadratu. Bez konta, bez nazwiska, kilka sekund.',
+      then: 'Nauczyciel widzi obrazek klasy, nie Twoje imię. Jedno kliknięcie nic nie znaczy — liczy się, gdy ktoś wiele razy odpowiada tak samo.'
     },
     rodzic: {
       track: 'szkola',
@@ -32,7 +32,7 @@
     },
     dyrektor: {
       track: 'szkola',
-      you: 'Ustalasz częstotliwość: po lekcji, raz dziennie albo raz w semestrze. Patrzą tu dyrektor i pedagog.',
+      you: 'Ustalasz częstotliwość: po lekcji, raz dziennie albo raz w semestrze. Ten widok jest dla ciebie i pedagoga.',
       then: 'Widać, gdzie warto zapytać, co się dzieje. To nie jest narzędzie do rozliczania nauczycieli. Pojedynczy zły głos to szum.'
     },
     student: {
