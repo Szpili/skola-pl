@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Skola — ocena zajęć na dwóch osiach: ile się nauczyłem i czy mi się podobało. Jedno stuknięcie. Dla szkół i uczelni w Polsce.">
+<title>Skola — dużo się nauczyłeś i czy Ci się podobało?</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<nav class="top">
+  <span>Skola</span>
+  <span>
+    <a class="on" href="./">Start</a>
+    · <a href="explainer.html">Jak to działa</a>
+    · <a href="mailto:kontakt@weryta.pl">Kontakt</a>
+  </span>
+</nav>
+<section class="hero">
+  <p class="eyebrow">Dla szkół i uczelni w Polsce</p>
+  <h1>Dużo się nauczyłeś <span class="light">i czy Ci się podobało?</span></h1>
+  <p class="lede">Dwa pytania. Jedno stuknięcie. Tyle robi <span data-noun="person">uczeń</span> po <span data-noun="lesson">lekcji</span>.</p>
+  <p class="lede">Wyżej znaczy: więcej się nauczyłem. Bardziej w prawo: bardziej mi się podobało.
+  Jedno kliknięcie nigdy nie zlepia tego w jedną gwiazdkę — bo <span data-noun="lesson">lekcja</span> może być trudna i dobra jednocześnie.</p>
+  <div class="chips" role="group" aria-label="Szkoła albo uczelnia">
+    <button type="button" data-track="szkola">Szkoła</button>
+    <button type="button" data-track="uczelnia">Uczelnia</button>
+  </div>
+  <div class="chips" role="group" aria-label="Kim jesteś">
+    <button type="button" data-role="uczen">Uczeń</button>
+    <button type="button" data-role="rodzic">Rodzic</button>
+    <button type="button" data-role="nauczyciel">Nauczyciel</button>
+    <button type="button" data-role="dyrektor">Dyrektor / pedagog</button>
+    <button type="button" data-role="student">Student</button>
+  </div>
+  <div class="rolebox" id="role-copy"></div>
+  <p>
+    <a class="cta" href="#kwadrat">Spróbuj kwadratu</a>
+    <a class="cta ghost" href="explainer.html">Przeczytaj wyjaśnienie</a>
+  </p>
+</section>
+<hr class="rule">
+<section class="wrap" id="kwadrat">
+  <h2>Jak używać kwadratu</h2>
+  <p class="lede" style="margin:0 0 18px">Kliknij pole. To jedyna rzecz, której trzeba się nauczyć.</p>
+  <div id="skola-guide"></div>
+</section>
+<hr class="rule">
+<section class="wrap">
+  <h2>Co potem widzi <span data-noun="place">szkoła</span></h2>
+  <p class="lede" style="margin:0 0 18px">Każde stuknięcie to jeden mały kolorowy kwadracik.
+  Złóż całą klasę i masz obrazek, który czyta się w sekundę.
+  Poniżej <strong>przykładowa klasa</strong> — wymyślone imiona, nie prawdziwe oceny.</p>
+  <div id="skola"></div>
+</section>
+<hr class="rule">
+<section class="wrap">
+  <h2>Czego tu nie ma</h2>
+  <p class="lede" style="margin:0">To nie służy do rozliczania nauczycieli. Pojedynczy zły głos nic nie znaczy.
+  Głosy są z założenia anonimowe. Częstotliwość ustala <span data-noun="place">szkoła</span>.
+  <a href="explainer.html">Pełne wyjaśnienie — jedna strona.</a></p>
+</section>
+<footer class="wrap">
+  <p class="fnote">Dane na tej stronie są przykładowe. Pilotaże ustalamy indywidualnie:
+  <a href="mailto:kontakt@weryta.pl">kontakt@weryta.pl</a>.
+  Wersja akademicka z danymi demonstracyjnymi z USA: <a href="https://skola.weryta.com/pl/">skola.weryta.com</a>.</p>
+</footer>
+<script src="assets/skola.js"></script>
+<script src="assets/site.js"></script>
+<script>
+Skola.guide(document.getElementById('skola-guide'), 'pl');
+Skola.mount(document.getElementById('skola'), { lang: 'pl', schoolOnly: true });
+</script>
+</body>
+</html>
