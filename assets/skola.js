@@ -217,12 +217,12 @@
   var KIDS = ['Ada', 'Bartek', 'Celina', 'Dawid', 'Ela', 'Filip', 'Gosia', 'Hubert'];
   /* home = [gx, gy] the kid's typical answer for this class; quirks override */
   var SCHOOL_TEACHERS = [
-    { id: 'sd1', name: 'pani Kwiatkowska', subject: { en: 'Reading', pl: 'Czytanie' }, home: [4, 4] },
-    { id: 'sd2', name: 'pan Baran', subject: { en: 'Math', pl: 'Matematyka' }, home: [1, 4] },
-    { id: 'sd3', name: 'pani Czerwińska', subject: { en: 'Science', pl: 'Przyroda' }, home: [3, 3] },
-    { id: 'sd4', name: 'pan Dąbrowski', subject: { en: 'History', pl: 'Historia' }, home: [1, 1] },
-    { id: 'sd5', name: 'pani Eska', subject: { en: 'Art', pl: 'Plastyka' }, home: [4, 1] },
-    { id: 'sd6', name: 'pan Filipek', subject: { en: 'Gym', pl: 'WF' }, home: [2, 2] }
+    { id: 'sd1', name: { pl: 'pani Kwiatkowska', en: 'Ms. Kwiatkowska' }, subject: { en: 'Reading', pl: 'Czytanie' }, home: [4, 4] },
+    { id: 'sd2', name: { pl: 'pan Baran', en: 'Mr. Baran' }, subject: { en: 'Math', pl: 'Matematyka' }, home: [1, 4] },
+    { id: 'sd3', name: { pl: 'pani Czerwińska', en: 'Ms. Czerwińska' }, subject: { en: 'Science', pl: 'Przyroda' }, home: [3, 3] },
+    { id: 'sd4', name: { pl: 'pan Dąbrowski', en: 'Mr. Dąbrowski' }, subject: { en: 'History', pl: 'Historia' }, home: [1, 1] },
+    { id: 'sd5', name: { pl: 'pani Eska', en: 'Ms. Eska' }, subject: { en: 'Art', pl: 'Plastyka' }, home: [4, 1] },
+    { id: 'sd6', name: { pl: 'pan Filipek', en: 'Mr. Filipek' }, subject: { en: 'Gym', pl: 'WF' }, home: [2, 2] }
   ];
   function clamp5(v) { return v < 0 ? 0 : v > 4 ? 4 : v; }
   /* local calendar date — NOT toISOString(), which is UTC and shifts the day
@@ -470,6 +470,7 @@
     opts = opts || {};
     var t = STR[opts.lang] || STR.en;
     var lang = opts.lang === 'pl' ? 'pl' : 'en';
+    function N(x){var n=x.name;return esc(typeof n==='string'?n:(lang==='pl'?n.pl:n.en));}
     var schoolOnly = !!opts.schoolOnly;
     var today = ymd(new Date());
     var school = genSchool(today);
@@ -639,7 +640,7 @@
         '<button class="sk-gray' + (state.gray ? ' on' : '') + '" data-gray title="' + t.grayTitle + '">' + t.gray + '</button>' +
         '</div></div><p class="sk-src">' + srcLabel + '</p>';
     }
-    var SCHOOL_NAME = 'Szkoła na Wzgórzu';   /* fictional — see KIDS comment */
+    var SCHOOL_NAME = (lang==='pl') ? 'Szkoła na Wzgórzu' : 'Hilltop School';   /* fictional — see KIDS comment */
 
     function uniSchools() {
       if (!dan.schools.length) return '<p class="sk-note">…</p>';
@@ -648,8 +649,8 @@
         sorted.map(function (s) {
           var rgb = aggRGB(s.cells);
           return '<div class="sk-card" data-school="' + esc(s.id) + '" style="border-color:' + css(rgb) + '">' +
-            avatarHtml(s.name, s.has_logo ? imgUrl(s.logo) : null) +
-            '<p class="nm">' + esc(s.name) + '</p><p class="sb">' +
+            avatarHtml(N(s), s.has_logo ? imgUrl(s.logo) : null) +
+            '<p class="nm">' + N(s) + '</p><p class="sb">' +
             (s.state ? esc(s.state) + ' · ' : '') +
             (totalOf(s.cells) ? totalOf(s.cells) + ' ' + t.votes : t.notRated) + '</p>' +
             gridHtml(s.cells, { mini: true, gray: state.gray, coins: state.coins }) + '</div>';
@@ -683,8 +684,8 @@
             var cells = danCellsWithLocal(te);
             var rgb = aggRGB(cells);
             return '<div class="sk-card" data-teacher="' + esc(te.id) + '" style="border-color:' + css(rgb) + '">' +
-              avatarHtml(te.name, imgUrl(te.src)) +
-              '<p class="nm">' + esc(te.name) + '</p><p class="sb">' + totalOf(cells) + ' ' + t.votes + '</p>' +
+              avatarHtml(N(te), imgUrl(te.src)) +
+              '<p class="nm">' + N(te) + '</p><p class="sb">' + totalOf(cells) + ' ' + t.votes + '</p>' +
               gridHtml(cells, { mini: true, gray: state.gray, coins: state.coins }) + '</div>';
           }).join('') + '</div>';
         bindCommon();
@@ -702,8 +703,8 @@
     function uniTeachersShell() {
       var s = findSchool(state.sid);
       return '<p class="sk-back"><button data-back>' + t.back + '</button></p>' +
-        (s ? '<div class="sk-head">' + avatarHtml(s.name, s.has_logo ? imgUrl(s.logo) : null) +
-          '<div><h3>' + esc(s.name) + '</h3><p class="st">' + s.total + ' ' + t.votes + '</p></div></div>' : '') +
+        (s ? '<div class="sk-head">' + avatarHtml(N(s), s.has_logo ? imgUrl(s.logo) : null) +
+          '<div><h3>' + N(s) + '</h3><p class="st">' + s.total + ' ' + t.votes + '</p></div></div>' : '') +
         '<div id="sk-own"></div>' +
         '<div id="sk-async"><p class="sk-note">…</p></div>';
     }
@@ -724,8 +725,8 @@
            a false statement in the mode that is open by default */
         var dunno = localFor('dan:' + te.id, 'dunno').filter(function (r) { return r.day === today; }).length;
         holder.innerHTML =
-          '<div class="sk-head">' + avatarHtml(te.name, imgUrl(te.src)) +
-          '<div><h3>' + esc(te.name) + '</h3><p class="st">' + esc(te.school || '') + ' · ' + totalOf(cells) + ' ' + t.votes +
+          '<div class="sk-head">' + avatarHtml(N(te), imgUrl(te.src)) +
+          '<div><h3>' + N(te) + '</h3><p class="st">' + esc(te.school || '') + ' · ' + totalOf(cells) + ' ' + t.votes +
           ' · ' + chip(rgb) + Math.round(learningOf(cells) * 100) + '% ' + t.learning +
           ' · ' + Math.round(likingOf(cells) * 100) + '% ' + t.liked +
           (dunno ? ' · ✋ ' + t.dunnoCount(dunno) : '') + '</p></div></div>' +
@@ -837,7 +838,7 @@
             ' · ' + Math.round(likingOf(s.cells) * 100) + '% ' + t.liked
           : '<span style="opacity:.8">' + (n ? t.tooFew(n) : t.notRated) + '</span>';
         return '<div class="sk-card" data-school="' + esc(s.id) + '" style="border-color:' + css(rgb) + '">' +
-          '<p class="nm">' + esc(s.name) + '</p>' +
+          '<p class="nm">' + N(s) + '</p>' +
           (s.state ? '<p class="sb" style="margin:0 0 4px">' + esc(s.state) + '</p>' : '') +
           '<p class="sb">' + sub + '</p>' +
           gridHtml(s.cells, { mini: true, gray: state.gray, coins: state.coins }) + '</div>';
@@ -855,8 +856,8 @@
           var cells = cellsFromVotes(schoolVotes(te.id));
           var rgb = aggRGB(cells);
           return '<div class="sk-card" data-steacher="' + te.id + '" style="border-color:' + css(rgb) + '">' +
-            avatarHtml(te.name, null) +
-            '<p class="nm">' + esc(te.name) + '</p><p class="sb">' + esc(te.subject[lang]) + ' · ' + totalOf(cells) + ' ' + t.votes + '</p>' +
+            avatarHtml(N(te), null) +
+            '<p class="nm">' + N(te) + '</p><p class="sb">' + esc(te.subject[lang]) + ' · ' + totalOf(cells) + ' ' + t.votes + '</p>' +
             gridHtml(cells, { mini: true, gray: state.gray, coins: state.coins }) + '</div>';
         }).join('') + '</div>';
     }
@@ -884,8 +885,8 @@
       var maxT = 1;
       dayRow.forEach(function (d) { if (d.total > maxT) maxT = d.total; });
       return '<p class="sk-back"><button data-back>' + t.back + '</button></p>' +
-        '<div class="sk-head">' + avatarHtml(te.name, null) +
-        '<div><h3>' + esc(te.name) + '</h3><p class="st">' + esc(te.subject[lang]) + ' · ' + totalOf(cells) + ' ' + t.votes +
+        '<div class="sk-head">' + avatarHtml(N(te), null) +
+        '<div><h3>' + N(te) + '</h3><p class="st">' + esc(te.subject[lang]) + ' · ' + totalOf(cells) + ' ' + t.votes +
         ' · ' + chip(rgb) + Math.round(learningOf(cells) * 100) + '% ' + t.learning +
         ' · ' + Math.round(likingOf(cells) * 100) + '% ' + t.liked +
         (dunno ? ' · ✋ ' + t.dunnoCount(dunno) : '') + '</p></div></div>' +
