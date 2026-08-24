@@ -1,13 +1,16 @@
-# Polish-market Skola (GitHub Pages)
+# Skola landing (GitHub Pages)
 
-Visitor-facing site is Polish. Code comments and this README are English.
+Polish is the default (`/`). English is `/en/`. Code comments and this README are English.
+
+Relative paths only — copy the whole tree to Dan’s server later; EN stays at `en/`.
 
 ## Local preview
 
 ```bash
 cd deploy/skola-pl-rynek
 python3 -m http.server 8088
-# open http://127.0.0.1:8088/
+# http://127.0.0.1:8088/      Polish
+# http://127.0.0.1:8088/en/   English
 ```
 
 ## Publish
@@ -18,6 +21,4 @@ From the physix repo:
 deploy/push-skola-pl.sh
 ```
 
-That creates (if needed) a public GitHub repo, pushes `main`, and turns on Pages from `main` at `/`. No custom domain until you add a `CNAME` file and DNS.
-
-Until then the URL is `https://<github-user>.github.io/<repo>/`.
+Until a custom domain: `https://szpili.github.io/skola-pl/` and `https://szpili.github.io/skola-pl/en/`.
