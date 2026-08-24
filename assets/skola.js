@@ -1216,10 +1216,194 @@
     });
   }
 
+  /* ---------- TILES: Dan’s sp.html chrome (click, no labels) ----------
+     Same 5×5 stream, fictional Hilltop class. No Three.js, no US joke flags.
+     Trail crumbs stack; teacher tap opens gray blox + day dots. */
+  function tiles(el, opts) {
+    opts = opts || {};
+    var lang = opts.lang === 'pl' ? 'pl' : 'en';
+    var assetBase = opts.assetBase || 'assets/';
+    var today = ymd(new Date());
+    var school = genSchool(today);
+    var schoolName = lang === 'pl' ? 'Szkoła na Wzgórzu' : 'Hilltop School';
+    var schoolMark = assetBase + 'hilltop.svg';
+    var currentTeacher = null;
+    var dayFilter = null;
+
+    function tName(te) {
+      var n = te.name;
+      return typeof n === 'string' ? n : (lang === 'pl' ? n.pl : n.en);
+    }
+    function initials(name) {
+      var core = name.replace(/^(pani|pan|Ms\.|Mr\.)\s+/i, '').trim();
+      var parts = core.split(/\s+/);
+      if (parts.length >= 2) return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+      return core.slice(0, 2).toUpperCase();
+    }
+    function accentOf(cells) {
+      var rgb = aggRGB(cells);
+      return rgb ? css(rgb) : '#555';
+    }
+    function votesOf(tid) {
+      return school.votes.filter(function (x) { return x.tid === tid; });
+    }
+    function schoolAccent() {
+      var cells = emptyCells();
+      SCHOOL_TEACHERS.forEach(function (te) { addCells(cells, cellsFromVotes(votesOf(te.id))); });
+      return accentOf(cells);
+    }
+
+    el.classList.add('skt-host');
+    el.innerHTML = '<nav class="skt-trail" aria-label="Location"></nav><div class="skt-stage"></div>';
+    var trailEl = el.querySelector('.skt-trail');
+    var stageEl = el.querySelector('.skt-stage');
+
+    function face(kind, name, src, accent, onClick, crumb) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = (crumb ? 'skt-crumb' : 'skt-tile') + ' is-' + kind;
+      btn.style.setProperty('--accent', accent);
+      btn.setAttribute('aria-label', name);
+      var frame = crumb ? btn : document.createElement('div');
+      if (!crumb) { frame.className = 'skt-frame'; btn.appendChild(frame); }
+      if (src) {
+        var img = document.createElement('img');
+        img.src = src; img.alt = '';
+        frame.appendChild(img);
+      } else {
+        var ini = document.createElement('span');
+        ini.className = 'skt-ini';
+        ini.textContent = initials(name);
+        frame.appendChild(ini);
+      }
+      btn.addEventListener('click', onClick);
+      return btn;
+    }
+
+    function paintTrail() {
+      trailEl.innerHTML = '';
+      var items = [{
+        kind: 'school', name: schoolName, src: schoolMark, accent: schoolAccent(),
+        go: showTeachers
+      }];
+      if (currentTeacher) {
+        items.push({
+          kind: 'teacher', name: tName(currentTeacher), src: null,
+          accent: accentOf(cellsFromVotes(votesOf(currentTeacher.id))),
+          go: function () { showResults(currentTeacher); }
+        });
+      }
+      items.forEach(function (it, i) {
+        var btn = face(it.kind, it.name, it.src, it.accent, it.go, true);
+        btn.classList.add('is-sz' + Math.min(items.length - 1 - i, 2));
+        trailEl.appendChild(btn);
+      });
+    }
+
+    function showTeachers() {
+      currentTeacher = null;
+      dayFilter = null;
+      paintTrail();
+      var grid = document.createElement('div');
+      grid.className = 'skt-grid';
+      grid.setAttribute('aria-label', lang === 'pl' ? 'Nauczyciele' : 'Teachers');
+      SCHOOL_TEACHERS.forEach(function (te) {
+        var cells = cellsFromVotes(votesOf(te.id));
+        grid.appendChild(face('teacher', tName(te), null, accentOf(cells), function () {
+          showResults(te);
+        }, false));
+      });
+      stageEl.innerHTML = '';
+      stageEl.appendChild(grid);
+      if (opts.hash) history.replaceState(null, '', '#t');
+    }
+
+    function bloxEl(cells) {
+      var wrap = document.createElement('div');
+      wrap.className = 'skt-blox';
+      wrap.setAttribute('aria-hidden', 'true');
+      var max = 1;
+      var gy, gx, n;
+      for (gy = 0; gy < 5; gy++) for (gx = 0; gx < 5; gx++) {
+        n = (cells[gy] && cells[gy][gx]) || 0;
+        if (n > max) max = n;
+      }
+      for (gy = 4; gy >= 0; gy--) {
+        for (gx = 0; gx < 5; gx++) {
+          n = (cells[gy] && cells[gy][gx]) || 0;
+          var cell = document.createElement('div');
+          cell.className = 'cell';
+          if (n > 0) {
+            var v = Math.round(36 + (n / max) * 219);
+            var sq = document.createElement('div');
+            sq.className = 'sq';
+            sq.style.background = 'rgb(' + v + ',' + v + ',' + v + ')';
+            cell.appendChild(sq);
+          }
+          wrap.appendChild(cell);
+        }
+      }
+      return wrap;
+    }
+
+    function showResults(te) {
+      currentTeacher = te;
+      paintTrail();
+      var all = votesOf(te.id);
+      var shown = dayFilter
+        ? all.filter(function (v) { return v.day === dayFilter; })
+        : all;
+      var box = document.createElement('div');
+      box.className = 'skt-results';
+      box.appendChild(bloxEl(cellsFromVotes(shown)));
+
+      var days = school.days.slice();
+      all.forEach(function (v) { if (days.indexOf(v.day) < 0) days.push(v.day); });
+      days.sort();
+      if (days.length > 10) days = days.slice(-10);
+      var row = document.createElement('div');
+      row.className = 'skt-days';
+      row.setAttribute('aria-label', lang === 'pl' ? 'Dni' : 'Days');
+      days.forEach(function (day) {
+        var dv = all.filter(function (v) { return v.day === day; });
+        var rgb = aggRGB(cellsFromVotes(dv));
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', day);
+        if (dayFilter === day) b.classList.add('is-on');
+        var dot = document.createElement('span');
+        dot.className = 'dot';
+        var sz = dv.length ? Math.round(8 + 10 * Math.min(1, Math.sqrt(dv.length / 8))) : 6;
+        dot.style.width = dot.style.height = sz + 'px';
+        dot.style.background = dv.length && rgb ? css(rgb) : '#222';
+        b.appendChild(dot);
+        b.addEventListener('click', function () {
+          dayFilter = dayFilter === day ? null : day;
+          showResults(te);
+        });
+        row.appendChild(b);
+      });
+      box.appendChild(row);
+      stageEl.innerHTML = '';
+      stageEl.appendChild(box);
+      if (opts.hash) history.replaceState(null, '', '#t/' + te.id);
+    }
+
+    if (opts.hash && location.hash.indexOf('#t/') === 0) {
+      var id = location.hash.slice(3);
+      var te0 = null;
+      for (var i = 0; i < SCHOOL_TEACHERS.length; i++) if (SCHOOL_TEACHERS[i].id === id) te0 = SCHOOL_TEACHERS[i];
+      if (te0) showResults(te0); else showTeachers();
+    } else {
+      showTeachers();
+    }
+  }
+
   /* exports (browser + node self-check) */
   var api = {
     mount: mount,
     guide: guide,
+    tiles: tiles,
     _math: { aggRGB: aggRGB, learningOf: learningOf, likingOf: likingOf, totalOf: totalOf, colSums: colSums, cellsFromVotes: cellsFromVotes, patterns: patterns, flipRows: flipRows },
     _gen: { genSchool: genSchool, mulberry32: mulberry32 }
   };

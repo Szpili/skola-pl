@@ -12,6 +12,7 @@
 <link rel="alternate" hreflang="pl" href="../">
 <title>Skola — did you learn a lot, and did you like it?</title>
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/tiles.css">
 </head>
 <body>
 <nav class="top">
@@ -55,9 +56,10 @@
 <hr class="rule">
 <section class="wrap">
   <h2>What the <span data-noun="place">school</span> sees next</h2>
-  <p class="lede" style="margin:0 0 18px">Every tap is one small colored square.
+  <p class="lede" style="margin:0 0 12px">Every tap is one small colored square.
   Collect the whole class and you get a picture that reads in a second.
-  Below is a <strong>sample class</strong> — invented names, not real ratings.</p>
+  Below is a <strong>sample class</strong> — unlabeled tiles, invented names, not real ratings.
+  <a href="app.html">Full screen</a>.</p>
   <div id="skola"></div>
 </section>
 <hr class="rule">
@@ -72,11 +74,11 @@
   <a href="mailto:kontakt@weryta.pl">kontakt@weryta.pl</a>.
   Academic demo with US demonstration data: <a href="https://skola.weryta.com/">skola.weryta.com</a>.</p>
 </footer>
-<script src="../assets/skola.js"></script>
+<script src="../assets/skola.js?v=tiles2"></script>
 <script src="../assets/site.js"></script>
 <script>
 Skola.guide(document.getElementById('skola-guide'), 'en');
-Skola.mount(document.getElementById('skola'), { lang: 'en', schoolOnly: true });
+Skola.tiles(document.getElementById('skola'), { lang: 'en', assetBase: '../assets/' });
 </script>
 </body>
 </html>

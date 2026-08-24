@@ -1,0 +1,80 @@
+/* Dan’s sp.html tile chrome — click, no labels. Prefix .skt so the paper landing stays paper. */
+.skt-host{
+  --skt-line:#333;
+  background:#000;color:#eee;
+  min-height:min(78vh,720px);
+  border-radius:16px;
+  overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  padding:10px 12px 16px;
+  box-sizing:border-box;
+  user-select:none;-webkit-tap-highlight-color:transparent;
+}
+.skt-page,.skt-page body{margin:0;height:100%;background:#000}
+.skt-page .skt-host{min-height:100dvh;height:100%;border-radius:0;padding:max(8px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))}
+
+.skt-trail{
+  display:flex;flex-direction:column;align-items:center;
+  flex:0 0 auto;width:100%;padding:0 0 10px;
+}
+.skt-crumb{
+  appearance:none;border:3px solid var(--accent,#333);background:#111;
+  padding:0;margin:0;width:128px;height:128px;border-radius:10%;
+  overflow:hidden;cursor:pointer;flex:0 0 auto;box-sizing:border-box;position:relative;
+}
+.skt-crumb.is-sz0{width:min(72vw,44vh,280px);height:min(72vw,44vh,280px);border-width:6px;z-index:4}
+.skt-crumb.is-sz0:not(:last-child){margin-bottom:calc(-0.9 * min(72vw,44vh,280px))}
+.skt-crumb.is-sz1{width:160px;height:160px;z-index:3}
+.skt-crumb.is-sz1:not(:last-child){margin-bottom:-144px}
+.skt-crumb.is-sz2{width:112px;height:112px;z-index:2}
+.skt-crumb.is-sz2:not(:last-child){margin-bottom:-100px}
+.skt-crumb img,.skt-crumb .skt-ini{
+  display:flex;width:100%;height:100%;align-items:center;justify-content:center;
+  object-fit:contain;pointer-events:none;
+}
+.skt-crumb.is-teacher img,.skt-crumb.is-teacher .skt-ini{object-fit:cover}
+.skt-crumb:active{transform:scale(.94)}
+
+.skt-stage{position:relative;flex:1 1 auto;min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.skt-grid{
+  flex:0 1 auto;min-height:0;width:100%;max-width:720px;overflow:auto;
+  display:flex;flex-wrap:wrap;place-content:center;gap:16px 18px;padding:4px 2px 8px;
+  box-sizing:border-box;
+}
+.skt-tile{
+  appearance:none;border:0;background:transparent;padding:0;margin:0;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;width:min(28vw,132px);flex:0 0 auto;color:#eee;
+}
+.skt-frame{
+  width:100%;aspect-ratio:1;border-radius:10%;overflow:hidden;background:#111;
+  border:6px solid var(--accent,#333);box-sizing:border-box;display:grid;place-items:center;padding:8px;
+}
+.skt-tile.is-teacher .skt-frame{padding:0}
+.skt-tile img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.skt-tile.is-teacher img{object-fit:cover}
+.skt-ini{
+  font:700 clamp(22px,6vw,36px)/1 system-ui,sans-serif;color:#eee;letter-spacing:.04em;
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+}
+.skt-tile:active{transform:scale(.94)}
+
+.skt-results{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;flex:1 1 auto;min-height:0}
+.skt-blox{
+  width:min(78vw,280px);height:min(78vw,280px);margin:0 auto;
+  display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);
+  gap:3px;padding:6px;box-sizing:border-box;border-radius:10px;border:2px solid #444;background:#000;
+}
+.skt-blox .cell{border-radius:3px;background:#141414;min-width:0;min-height:0;position:relative}
+.skt-blox .cell .sq{position:absolute;inset:0;border-radius:2px}
+
+.skt-days{
+  flex:0 0 auto;width:min(92vw,420px);margin:0 auto;display:flex;justify-content:center;align-items:center;
+  gap:6px;padding:2px 0 6px;
+}
+.skt-days button{
+  appearance:none;flex:1 1 0;aspect-ratio:1;min-width:0;max-width:36px;box-sizing:border-box;
+  border:2px solid #444;border-radius:4px;padding:0;margin:0;background:#0d1117;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.skt-days button.is-on{box-shadow:0 0 0 2px #eee}
+.skt-days .dot{border-radius:50%;flex-shrink:0;pointer-events:none}

@@ -12,6 +12,7 @@
 <link rel="alternate" hreflang="en" href="en/">
 <title>Skola — ile się nauczyłeś i czy Ci się podobało?</title>
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/tiles.css">
 </head>
 <body>
 <nav class="top">
@@ -55,9 +56,10 @@
 <hr class="rule">
 <section class="wrap">
   <h2>Co potem widzi <span data-noun="place">szkoła</span></h2>
-  <p class="lede" style="margin:0 0 18px">Każde stuknięcie to jeden mały kolorowy kwadracik.
+  <p class="lede" style="margin:0 0 12px">Każde stuknięcie to jeden mały kolorowy kwadracik.
   Zbierz głosy całej klasy i masz obrazek, który czyta się w sekundę.
-  Poniżej <strong>przykładowa klasa</strong> — wymyślone imiona, nie prawdziwe oceny.</p>
+  Poniżej <strong>przykładowa klasa</strong> — kafelki bez podpisów, wymyślone imiona, nie prawdziwe oceny.
+  <a href="app.html">Pełny ekran</a>.</p>
   <div id="skola"></div>
 </section>
 <hr class="rule">
@@ -72,11 +74,11 @@
   <a href="mailto:kontakt@weryta.pl">kontakt@weryta.pl</a>.
   Wersja akademicka z danymi demonstracyjnymi z USA: <a href="https://skola.weryta.com/pl/">skola.weryta.com</a>.</p>
 </footer>
-<script src="assets/skola.js"></script>
+<script src="assets/skola.js?v=tiles2"></script>
 <script src="assets/site.js"></script>
 <script>
 Skola.guide(document.getElementById('skola-guide'), 'pl');
-Skola.mount(document.getElementById('skola'), { lang: 'pl', schoolOnly: true });
+Skola.tiles(document.getElementById('skola'), { lang: 'pl', assetBase: 'assets/' });
 </script>
 </body>
 </html>
