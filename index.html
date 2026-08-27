@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Skola — ocena zajęć na dwóch osiach: ile się nauczyłem i czy mi się podobało. Jedno stuknięcie. Dla szkół i uczelni w Polsce.">
 <meta property="og:title" content="Skola — dwie osie zamiast jednej gwiazdki">
 <meta property="og:description" content="Ocena zajęć na dwóch osiach: ile się nauczyłem i czy mi się podobało. Jedno stuknięcie.">
@@ -12,11 +12,11 @@
 <link rel="alternate" hreflang="en" href="en/">
 <title>Skola — ile się nauczyłeś i czy Ci się podobało?</title>
 <link rel="stylesheet" href="assets/site.css">
-<link rel="stylesheet" href="assets/tiles.css">
+<link rel="stylesheet" href="assets/tiles.css?v=8">
 </head>
 <body>
 <nav class="top">
-  <span>Skola</span>
+  <span class="sk-egg-mark">Skola</span>
   <span>
     <a class="on" href="./">Start</a>
     · <a href="explainer.html">Jak to działa</a>
@@ -58,7 +58,8 @@
   <h2>Co potem widzi <span data-noun="place">szkoła</span></h2>
   <p class="lede" style="margin:0 0 12px">Każde stuknięcie to jeden mały kolorowy kwadracik.
   Zbierz głosy całej klasy i masz obrazek, który czyta się w sekundę.
-  Poniżej <strong>przykładowa klasa</strong> — kafelki bez podpisów, wymyślone imiona, nie prawdziwe oceny.
+  Poniżej <strong>przykładowe szkoły</strong> — kafelki bez podpisów, wymyślone nazwy, nie prawdziwe oceny.
+  Każdy kafelek to inna szkoła z własną kadrą. Szkoła bez herbu dostaje tarczę z nazwy.
   <a href="app.html">Pełny ekran</a>.</p>
   <div id="skola"></div>
 </section>
@@ -72,13 +73,15 @@
 <footer class="wrap">
   <p class="fnote">Dane na tej stronie są przykładowe. Pilotaże ustalamy indywidualnie:
   <a href="mailto:kontakt@weryta.pl">kontakt@weryta.pl</a>.
-  Wersja akademicka z danymi demonstracyjnymi z USA: <a href="https://skola.weryta.com/pl/">skola.weryta.com</a>.</p>
+  Wersja akademicka z danymi demonstracyjnymi z USA: <a href="https://skola.weryta.com/">skola.weryta.com</a>.</p>
 </footer>
-<script src="assets/skola.js?v=tiles2"></script>
+<script src="assets/skola.js?v=tiles6"></script>
 <script src="assets/site.js"></script>
 <script>
 Skola.guide(document.getElementById('skola-guide'), 'pl');
 Skola.tiles(document.getElementById('skola'), { lang: 'pl', assetBase: 'assets/' });
 </script>
+<!-- jajka off: ?eggs=0 (klei się w tej przeglądarce). z powrotem: ?eggs=1. albo wywal ten tag. -->
+<script src="assets/eggs.js?v=4"></script>
 </body>
 </html>

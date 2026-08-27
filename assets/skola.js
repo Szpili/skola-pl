@@ -217,12 +217,60 @@
   var KIDS = ['Ada', 'Bartek', 'Celina', 'Dawid', 'Ela', 'Filip', 'Gosia', 'Hubert'];
   /* home = [gx, gy] the kid's typical answer for this class; quirks override */
   var SCHOOL_TEACHERS = [
-    { id: 'sd1', name: { pl: 'pani Kwiatkowska', en: 'Ms. Kwiatkowska' }, subject: { en: 'Reading', pl: 'Czytanie' }, home: [4, 4] },
-    { id: 'sd2', name: { pl: 'pan Baran', en: 'Mr. Baran' }, subject: { en: 'Math', pl: 'Matematyka' }, home: [1, 4] },
-    { id: 'sd3', name: { pl: 'pani Czerwińska', en: 'Ms. Czerwińska' }, subject: { en: 'Science', pl: 'Przyroda' }, home: [3, 3] },
-    { id: 'sd4', name: { pl: 'pan Dąbrowski', en: 'Mr. Dąbrowski' }, subject: { en: 'History', pl: 'Historia' }, home: [1, 1] },
-    { id: 'sd5', name: { pl: 'pani Eska', en: 'Ms. Eska' }, subject: { en: 'Art', pl: 'Plastyka' }, home: [4, 1] },
-    { id: 'sd6', name: { pl: 'pan Filipek', en: 'Mr. Filipek' }, subject: { en: 'Gym', pl: 'WF' }, home: [2, 2] }
+    { id: 'sd1', name: { pl: 'pani Kwiatkowska', en: 'Ms. Kwiatkowska' }, subject: { en: 'Reading', pl: 'Czytanie' }, home: [4, 4], photo: 'sd1.webp' },
+    { id: 'sd2', name: { pl: 'pan Baran', en: 'Mr. Baran' }, subject: { en: 'Math', pl: 'Matematyka' }, home: [1, 4], photo: 'sd2.webp' },
+    { id: 'sd3', name: { pl: 'pani Czerwińska', en: 'Ms. Czerwińska' }, subject: { en: 'Science', pl: 'Przyroda' }, home: [3, 3], photo: 'sd3.webp' },
+    { id: 'sd4', name: { pl: 'pan Dąbrowski', en: 'Mr. Dąbrowski' }, subject: { en: 'History', pl: 'Historia' }, home: [1, 1], photo: 'sd4.webp' },
+    { id: 'sd5', name: { pl: 'pani Eska', en: 'Ms. Eska' }, subject: { en: 'Art', pl: 'Plastyka' }, home: [4, 1], photo: 'sd5.webp' },
+    { id: 'sd6', name: { pl: 'pan Filipek', en: 'Mr. Filipek' }, subject: { en: 'Gym', pl: 'WF' }, home: [2, 2], photo: 'sd6.webp' }
+  ];
+  /* Fictional schools only — real names + synthetic votes is the SeDoMoCha trap.
+     logo: handmade mark; no logo → herb from the name.
+     Each school has its own staff. Photos only where we generated them. */
+  var DEMO_SCHOOLS = [
+    { id: 'hilltop', seed: 20260729, logo: 'hilltop.svg',
+      name: { pl: 'Szkoła na Wzgórzu', en: 'Hilltop School' }, teachers: SCHOOL_TEACHERS },
+    { id: 'grove',
+      name: { pl: 'SP im. Leśnej Polany', en: 'Forest Glade Primary' },
+      teachers: [
+        { id: 'gv1', name: { pl: 'pani Jagoda', en: 'Ms. Jagoda' }, home: [4, 3] },
+        { id: 'gv2', name: { pl: 'pan Sosna', en: 'Mr. Sosna' }, home: [2, 4] },
+        { id: 'gv3', name: { pl: 'pani Brzoza', en: 'Ms. Brzoza' }, home: [3, 2] },
+        { id: 'gv4', name: { pl: 'pan Mech', en: 'Mr. Mech' }, home: [1, 3] }
+      ] },
+    { id: 'river',
+      name: { pl: 'Liceum nad Rzeką', en: 'Riverside Lyceum' },
+      teachers: [
+        { id: 'rv1', name: { pl: 'pani Wilk', en: 'Ms. Wilk' }, home: [4, 4] },
+        { id: 'rv2', name: { pl: 'pan Most', en: 'Mr. Most' }, home: [0, 3] },
+        { id: 'rv3', name: { pl: 'pani Żuraw', en: 'Ms. Zuraw' }, home: [3, 3] },
+        { id: 'rv4', name: { pl: 'pan Bór', en: 'Mr. Bor' }, home: [2, 1] },
+        { id: 'rv5', name: { pl: 'pani Fala', en: 'Ms. Fala' }, home: [4, 2] }
+      ] },
+    { id: 'dune',
+      name: { pl: 'SP nr 12 im. Białej Wydmy', en: 'White Dune School No. 12' },
+      teachers: [
+        { id: 'dn1', name: { pl: 'pani Słoma', en: 'Ms. Sloma' }, home: [3, 4] },
+        { id: 'dn2', name: { pl: 'pan Wydma', en: 'Mr. Wydma' }, home: [1, 2] },
+        { id: 'dn3', name: { pl: 'pani Mewa', en: 'Ms. Mewa' }, home: [4, 1] },
+        { id: 'dn4', name: { pl: 'pan Piasek', en: 'Mr. Piasek' }, home: [2, 2] }
+      ] },
+    { id: 'sun',
+      name: { pl: 'Technikum Słoneczne', en: 'Sun Vocational School' },
+      teachers: [
+        { id: 'su1', name: { pl: 'pan Iskra', en: 'Mr. Iskra' }, home: [2, 4] },
+        { id: 'su2', name: { pl: 'pani Spaw', en: 'Ms. Spaw' }, home: [1, 1] },
+        { id: 'su3', name: { pl: 'pan Motor', en: 'Mr. Motor' }, home: [3, 3] },
+        { id: 'su4', name: { pl: 'pani Volt', en: 'Ms. Volt' }, home: [4, 2] }
+      ] },
+    { id: 'star',
+      name: { pl: 'Szkoła Gwiazdy Polarnej', en: 'Polar Star School' },
+      teachers: [
+        { id: 'st1', name: { pl: 'pani Zorza', en: 'Ms. Zorza' }, home: [4, 4] },
+        { id: 'st2', name: { pl: 'pan Lis', en: 'Mr. Lis' }, home: [0, 4] },
+        { id: 'st3', name: { pl: 'pani Sanie', en: 'Ms. Sanie' }, home: [2, 3] },
+        { id: 'st4', name: { pl: 'pan Mróz', en: 'Mr. Mroz' }, home: [3, 1] }
+      ] }
   ];
   function clamp5(v) { return v < 0 ? 0 : v > 4 ? 4 : v; }
   /* local calendar date — NOT toISOString(), which is UTC and shifts the day
@@ -233,8 +281,9 @@
       String(d.getMonth() + 1).padStart(2, '0') + '-' +
       String(d.getDate()).padStart(2, '0');
   }
-  function genSchool(todayYmd) {
-    var rnd = mulberry32(20260729);
+  function genSchool(todayYmd, seed, teachers) {
+    var rnd = mulberry32(seed == null ? 20260729 : seed);
+    var roster = teachers || SCHOOL_TEACHERS;
     var days = [];
     var d = new Date(todayYmd + 'T12:00:00');
     while (days.length < 15) { /* 15 school days back from today */
@@ -242,7 +291,7 @@
       d.setDate(d.getDate() - 1);
     }
     var votes = []; /* {tid, student, day, gx, gy} */
-    SCHOOL_TEACHERS.forEach(function (t) {
+    roster.forEach(function (t) {
       days.forEach(function (day) {
         KIDS.forEach(function (kid) {
           if (rnd() < 0.18) return; /* absent, or simply did not tap */
@@ -1216,19 +1265,124 @@
     });
   }
 
+  /* Coat of arms from a school name — used when there is no real herb.
+     Deterministic SVG, no diffusion: SD writes garbage on shields. */
+  var HERB_TINCT = [
+    ['#8c1d2c', '#f0d48a'],
+    ['#1c3557', '#e6e1d4'],
+    ['#2c4a3c', '#d7c49a'],
+    ['#241c18', '#e6e1d4'],
+    ['#6a341c', '#f0d48a'],
+    ['#3a2152', '#e6dcc8']
+  ];
+  function hashStr(s) {
+    var h = 2166136261, i, t = String(s || '');
+    for (i = 0; i < t.length; i++) h = Math.imul(h ^ t.charCodeAt(i), 16777619);
+    return h >>> 0;
+  }
+  function foldName(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+  function herbCharge(name, h) {
+    var n = foldName(name);
+    var nr = n.match(/\bnr\.?\s*(\d{1,3})\b/);
+    var roman = n.match(/^([ivxlcdm]{2,7})\b/);
+    var num = nr ? nr[1] : (roman ? roman[1].toUpperCase() : '');
+    var kind;
+    if (/wzgor|gora|gory|hill|wydm/.test(n)) kind = 'hills';
+    else if (/las|polan|deb|dab|drzew|lip|buk|lesn/.test(n)) kind = 'tree';
+    else if (/rzek|wod|jezior|morz|fal/.test(n)) kind = 'waves';
+    else if (/slonc|sun/.test(n)) kind = 'sun';
+    else if (/gwiazd|star/.test(n)) kind = 'star';
+    else if (/ksiaz|nauka|kopern/.test(n)) kind = 'book';
+    else kind = ['star', 'book', 'sun', 'tree', 'hills', 'waves'][h % 6];
+    return { kind: kind, num: num };
+  }
+  function herbSvg(name) {
+    var h = hashStr(name);
+    var tin = HERB_TINCT[h % HERB_TINCT.length];
+    var field = tin[0], ink = tin[1];
+    var ch = herbCharge(name, h);
+    var y = ch.num ? 60 : 56;
+    var body = '';
+    if (ch.kind === 'hills') {
+      body = '<path fill="' + ink + '" d="M20 ' + (y + 16) + ' L35 ' + (y - 8) + ' L48 ' + (y + 6) + ' L63 ' + (y - 16) + ' L80 ' + (y + 16) + ' Z"/>';
+    } else if (ch.kind === 'tree') {
+      body = '<rect x="46" y="' + (y + 4) + '" width="8" height="16" fill="' + ink + '"/>' +
+        '<path fill="' + ink + '" d="M50 ' + (y - 22) + ' L68 ' + (y + 6) + ' H32 Z"/>';
+    } else if (ch.kind === 'waves') {
+      body = '<path fill="none" stroke="' + ink + '" stroke-width="3" stroke-linecap="round" d="M26 ' + (y - 4) + ' Q38 ' + (y - 14) + ' 50 ' + (y - 4) + ' T74 ' + (y - 4) + '"/>' +
+        '<path fill="none" stroke="' + ink + '" stroke-width="3" stroke-linecap="round" d="M26 ' + (y + 8) + ' Q38 ' + (y - 2) + ' 50 ' + (y + 8) + ' T74 ' + (y + 8) + '"/>';
+    } else if (ch.kind === 'sun') {
+      body = '<circle cx="50" cy="' + y + '" r="10" fill="' + ink + '"/>' +
+        '<g stroke="' + ink + '" stroke-width="2.4" stroke-linecap="round">' +
+        '<path d="M50 ' + (y - 22) + ' V' + (y - 14) + '"/><path d="M50 ' + (y + 14) + ' V' + (y + 22) + '"/>' +
+        '<path d="M28 ' + y + ' H36"/><path d="M64 ' + y + ' H72"/>' +
+        '<path d="M34.4 ' + (y - 15.6) + ' L39.6 ' + (y - 10.4) + '"/><path d="M60.4 ' + (y + 10.4) + ' L65.6 ' + (y + 15.6) + '"/>' +
+        '<path d="M34.4 ' + (y + 15.6) + ' L39.6 ' + (y + 10.4) + '"/><path d="M60.4 ' + (y - 10.4) + ' L65.6 ' + (y - 15.6) + '"/>' +
+        '</g>';
+    } else if (ch.kind === 'book') {
+      body = '<path fill="' + ink + '" d="M28 ' + (y - 10) + ' L50 ' + (y - 2) + ' L50 ' + (y + 16) + ' L28 ' + (y + 8) + ' Z"/>' +
+        '<path fill="' + ink + '" d="M72 ' + (y - 10) + ' L50 ' + (y - 2) + ' L50 ' + (y + 16) + ' L72 ' + (y + 8) + ' Z"/>';
+    } else {
+      body = '<path fill="' + ink + '" d="M50 ' + (y - 18) + ' L54.4 ' + (y - 4.4) + ' L68.8 ' + (y - 4.4) + ' L57.2 ' + (y + 4.4) + ' L61.6 ' + (y + 18) + ' L50 ' + (y + 9.2) + ' L38.4 ' + (y + 18) + ' L42.8 ' + (y + 4.4) + ' L31.2 ' + (y - 4.4) + ' L45.6 ' + (y - 4.4) + ' Z"/>';
+    }
+    if (ch.num) {
+      body += '<text x="50" y="36" text-anchor="middle" font-family="Georgia,Times,serif" font-size="14" font-weight="700" fill="' + ink + '">' + esc(ch.num) + '</text>';
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+      '<rect width="100" height="100" fill="#111"/>' +
+      '<path fill="' + field + '" d="M50 8 L86 22 L86 58 Q86 84 50 94 Q14 84 14 58 L14 22 Z"/>' +
+      '<path fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.6" d="M50 11 L83 24 L83 58 Q83 81 50 91 Q17 81 17 58 L17 24 Z"/>' +
+      body + '</svg>';
+  }
+  function herbDataUri(name) {
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(herbSvg(name));
+  }
+
   /* ---------- TILES: Dan’s sp.html chrome (click, no labels) ----------
-     Same 5×5 stream, fictional Hilltop class. No Three.js, no US joke flags.
-     Trail crumbs stack; teacher tap opens gray blox + day dots. */
+     Same 5×5 stream, fictional schools. No Three.js, no US joke flags.
+     Trail crumbs stack; teacher tap opens gray blox + day dots.
+     School with no logo gets a herb generated from its name. */
   function tiles(el, opts) {
     opts = opts || {};
     var lang = opts.lang === 'pl' ? 'pl' : 'en';
     var assetBase = opts.assetBase || 'assets/';
     var today = ymd(new Date());
-    var school = genSchool(today);
-    var schoolName = lang === 'pl' ? 'Szkoła na Wzgórzu' : 'Hilltop School';
-    var schoolMark = assetBase + 'hilltop.svg';
+    var school = genSchool(today, 20260729, SCHOOL_TEACHERS);
+    var currentSchool = DEMO_SCHOOLS[0];
     var currentTeacher = null;
     var dayFilter = null;
+    var hintView = 'schools';
+
+    function roster() {
+      return (currentSchool && currentSchool.teachers) || SCHOOL_TEACHERS;
+    }
+    function schoolById(id) {
+      for (var i = 0; i < DEMO_SCHOOLS.length; i++) if (DEMO_SCHOOLS[i].id === id) return DEMO_SCHOOLS[i];
+      return DEMO_SCHOOLS[0];
+    }
+    function teacherById(id) {
+      var list = roster(), i;
+      for (i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+      return null;
+    }
+
+    function sName(sc) {
+      var n = sc.name;
+      return typeof n === 'string' ? n : (lang === 'pl' ? n.pl : n.en);
+    }
+    function schoolSrc(sc) {
+      if (sc.logo) return assetBase + sc.logo;
+      return herbDataUri(sName(sc));
+    }
+    function schoolSeed(sc) {
+      return sc.seed == null ? hashStr(sc.id) : sc.seed;
+    }
+    function pickSchool(sc) {
+      currentSchool = sc;
+      school = genSchool(today, schoolSeed(sc), sc.teachers);
+    }
 
     function tName(te) {
       var n = te.name;
@@ -1249,15 +1403,58 @@
     }
     function schoolAccent() {
       var cells = emptyCells();
-      SCHOOL_TEACHERS.forEach(function (te) { addCells(cells, cellsFromVotes(votesOf(te.id))); });
+      roster().forEach(function (te) { addCells(cells, cellsFromVotes(votesOf(te.id))); });
       return accentOf(cells);
     }
 
     el.classList.add('skt-host');
-    el.innerHTML = '<nav class="skt-trail" aria-label="Location"></nav><div class="skt-stage"></div>';
+    el.innerHTML =
+      '<button type="button" class="skt-help" aria-expanded="false"></button>' +
+      '<div class="skt-hint" hidden></div>' +
+      '<nav class="skt-trail" aria-label="Location"></nav>' +
+      '<div class="skt-stage"></div>';
+    var helpBtn = el.querySelector('.skt-help');
+    var hintEl = el.querySelector('.skt-hint');
     var trailEl = el.querySelector('.skt-trail');
     var stageEl = el.querySelector('.skt-stage');
+    helpBtn.textContent = '?';
+    helpBtn.setAttribute('aria-label', lang === 'pl' ? 'Co to jest' : 'What is this');
 
+    var HINT = lang === 'pl' ? {
+      schools: 'Każdy kafelek to inna szkoła — inna kadra. Kolor ramki to głosy uczniów. Herb z nazwy, jeśli szkoła nie ma własnego. Stuknij szkołę.',
+      teachers: 'Każdy kafelek to nauczyciel tej szkoły. Kolor ramki — jak klasa oceniła lekcje. Stuknij nauczyciela. Kafelek szkoły u góry wraca do listy szkół.',
+      results: 'Szary kwadrat: ile stuknięć w którym polu. Góra = więcej nauki, prawo = bardziej się podobało. Kropki na dole to dni. Mały kafelek szkoły u góry — wróć do nauczycieli.'
+    } : {
+      schools: 'Each tile is a different school, with its own staff. Border colour is the student votes. A school with no crest gets a shield from its name. Tap a school.',
+      teachers: 'Each tile is a teacher at this school. Border colour is how the class rated the lessons. Tap a teacher. The school tile up top goes back to the school list.',
+      results: 'Grey square: how many taps landed in each cell. Up = learned more, right = liked it more. Dots underneath are days. The small school tile up top goes back to teachers.'
+    };
+    function setHint(view) {
+      hintView = view;
+      hintEl.textContent = HINT[view] || HINT.schools;
+    }
+    function hideHint() {
+      hintEl.hidden = true;
+      helpBtn.setAttribute('aria-expanded', 'false');
+    }
+    helpBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var on = hintEl.hidden;
+      hintEl.hidden = !on;
+      helpBtn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+    el.addEventListener('click', function () { hideHint(); });
+
+    function teacherSrc(te) {
+      if (te.photo) return assetBase + 'teachers/' + te.photo;
+      return null;
+    }
+    function iniEl(name) {
+      var ini = document.createElement('span');
+      ini.className = 'skt-ini';
+      ini.textContent = initials(name);
+      return ini;
+    }
     function face(kind, name, src, accent, onClick, crumb) {
       var btn = document.createElement('button');
       btn.type = 'button';
@@ -1269,12 +1466,22 @@
       if (src) {
         var img = document.createElement('img');
         img.src = src; img.alt = '';
+        img.addEventListener('error', function () {
+          if (kind === 'school') {
+            img.onerror = null;
+            img.src = herbDataUri(name);
+            return;
+          }
+          if (img.parentNode) img.parentNode.removeChild(img);
+          if (!frame.querySelector('.skt-ini')) frame.appendChild(iniEl(name));
+        });
         frame.appendChild(img);
+      } else if (kind === 'school') {
+        var g = document.createElement('img');
+        g.src = herbDataUri(name); g.alt = '';
+        frame.appendChild(g);
       } else {
-        var ini = document.createElement('span');
-        ini.className = 'skt-ini';
-        ini.textContent = initials(name);
-        frame.appendChild(ini);
+        frame.appendChild(iniEl(name));
       }
       btn.addEventListener('click', onClick);
       return btn;
@@ -1282,13 +1489,15 @@
 
     function paintTrail() {
       trailEl.innerHTML = '';
+      if (!currentSchool) return;
       var items = [{
-        kind: 'school', name: schoolName, src: schoolMark, accent: schoolAccent(),
-        go: showTeachers
+        kind: 'school', name: sName(currentSchool), src: schoolSrc(currentSchool),
+        accent: schoolAccent(),
+        go: currentTeacher ? showTeachers : showSchools
       }];
       if (currentTeacher) {
         items.push({
-          kind: 'teacher', name: tName(currentTeacher), src: null,
+          kind: 'teacher', name: tName(currentTeacher), src: teacherSrc(currentTeacher),
           accent: accentOf(cellsFromVotes(votesOf(currentTeacher.id))),
           go: function () { showResults(currentTeacher); }
         });
@@ -1296,26 +1505,65 @@
       items.forEach(function (it, i) {
         var btn = face(it.kind, it.name, it.src, it.accent, it.go, true);
         btn.classList.add('is-sz' + Math.min(items.length - 1 - i, 2));
+        btn.style.setProperty('--i', String(i));
         trailEl.appendChild(btn);
       });
     }
 
+    function writeHash() {
+      if (!opts.hash) return;
+      if (!currentSchool) history.replaceState(null, '', '#s');
+      else if (!currentTeacher) history.replaceState(null, '', '#s/' + currentSchool.id);
+      else history.replaceState(null, '', '#s/' + currentSchool.id + '/' + currentTeacher.id);
+    }
+
+    function showSchools() {
+      currentSchool = null;
+      currentTeacher = null;
+      dayFilter = null;
+      paintTrail();
+      var grid = document.createElement('div');
+      grid.className = 'skt-grid';
+      grid.setAttribute('aria-label', lang === 'pl' ? 'Szkoły' : 'Schools');
+      DEMO_SCHOOLS.forEach(function (sc, i) {
+        var syn = genSchool(today, schoolSeed(sc), sc.teachers);
+        var cells = emptyCells();
+        sc.teachers.forEach(function (te) {
+          addCells(cells, cellsFromVotes(syn.votes.filter(function (x) { return x.tid === te.id; })));
+        });
+        var btn = face('school', sName(sc), schoolSrc(sc), accentOf(cells), function () {
+          pickSchool(sc);
+          showTeachers();
+        }, false);
+        btn.style.setProperty('--i', String(i));
+        grid.appendChild(btn);
+      });
+      stageEl.innerHTML = '';
+      stageEl.appendChild(grid);
+      setHint('schools');
+      writeHash();
+    }
+
     function showTeachers() {
+      if (!currentSchool) pickSchool(DEMO_SCHOOLS[0]);
       currentTeacher = null;
       dayFilter = null;
       paintTrail();
       var grid = document.createElement('div');
       grid.className = 'skt-grid';
       grid.setAttribute('aria-label', lang === 'pl' ? 'Nauczyciele' : 'Teachers');
-      SCHOOL_TEACHERS.forEach(function (te) {
+      roster().forEach(function (te, i) {
         var cells = cellsFromVotes(votesOf(te.id));
-        grid.appendChild(face('teacher', tName(te), null, accentOf(cells), function () {
+        var btn = face('teacher', tName(te), teacherSrc(te), accentOf(cells), function () {
           showResults(te);
-        }, false));
+        }, false);
+        btn.style.setProperty('--i', String(i));
+        grid.appendChild(btn);
       });
       stageEl.innerHTML = '';
       stageEl.appendChild(grid);
-      if (opts.hash) history.replaceState(null, '', '#t');
+      setHint('teachers');
+      writeHash();
     }
 
     function bloxEl(cells) {
@@ -1328,11 +1576,13 @@
         n = (cells[gy] && cells[gy][gx]) || 0;
         if (n > max) max = n;
       }
+      var ci = 0;
       for (gy = 4; gy >= 0; gy--) {
         for (gx = 0; gx < 5; gx++) {
           n = (cells[gy] && cells[gy][gx]) || 0;
           var cell = document.createElement('div');
           cell.className = 'cell';
+          cell.style.setProperty('--i', String(ci++));
           if (n > 0) {
             var v = Math.round(36 + (n / max) * 219);
             var sq = document.createElement('div');
@@ -1364,11 +1614,12 @@
       var row = document.createElement('div');
       row.className = 'skt-days';
       row.setAttribute('aria-label', lang === 'pl' ? 'Dni' : 'Days');
-      days.forEach(function (day) {
+      days.forEach(function (day, di) {
         var dv = all.filter(function (v) { return v.day === day; });
         var rgb = aggRGB(cellsFromVotes(dv));
         var b = document.createElement('button');
         b.type = 'button';
+        b.style.setProperty('--i', String(di));
         b.setAttribute('aria-label', day);
         if (dayFilter === day) b.classList.add('is-on');
         var dot = document.createElement('span');
@@ -1386,16 +1637,25 @@
       box.appendChild(row);
       stageEl.innerHTML = '';
       stageEl.appendChild(box);
-      if (opts.hash) history.replaceState(null, '', '#t/' + te.id);
+      setHint('results');
+      writeHash();
     }
 
-    if (opts.hash && location.hash.indexOf('#t/') === 0) {
-      var id = location.hash.slice(3);
-      var te0 = null;
-      for (var i = 0; i < SCHOOL_TEACHERS.length; i++) if (SCHOOL_TEACHERS[i].id === id) te0 = SCHOOL_TEACHERS[i];
+    var h = opts.hash ? location.hash : '';
+    var deep = h.match(/^#s\/([^/]+)(?:\/([^/]+))?/);
+    if (deep) {
+      pickSchool(schoolById(deep[1]));
+      var teDeep = deep[2] ? teacherById(deep[2]) : null;
+      if (teDeep) showResults(teDeep); else showTeachers();
+    } else if (h.indexOf('#t/') === 0) {
+      pickSchool(DEMO_SCHOOLS[0]);
+      var te0 = teacherById(h.slice(3));
       if (te0) showResults(te0); else showTeachers();
-    } else {
+    } else if (h === '#t') {
+      pickSchool(DEMO_SCHOOLS[0]);
       showTeachers();
+    } else {
+      showSchools();
     }
   }
 
@@ -1404,6 +1664,7 @@
     mount: mount,
     guide: guide,
     tiles: tiles,
+    _herb: { svg: herbSvg, uri: herbDataUri, hash: hashStr },
     _math: { aggRGB: aggRGB, learningOf: learningOf, likingOf: likingOf, totalOf: totalOf, colSums: colSums, cellsFromVotes: cellsFromVotes, patterns: patterns, flipRows: flipRows },
     _gen: { genSchool: genSchool, mulberry32: mulberry32 }
   };

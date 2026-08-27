@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Skola — rate a class on two axes: how much you learned and whether you liked it. One tap. For schools and universities.">
 <meta property="og:title" content="Skola — two axes instead of one star">
 <meta property="og:description" content="Rate a class on two axes: how much you learned and whether you liked it. One tap.">
@@ -12,11 +12,11 @@
 <link rel="alternate" hreflang="pl" href="../">
 <title>Skola — did you learn a lot, and did you like it?</title>
 <link rel="stylesheet" href="../assets/site.css">
-<link rel="stylesheet" href="../assets/tiles.css">
+<link rel="stylesheet" href="../assets/tiles.css?v=8">
 </head>
 <body>
 <nav class="top">
-  <span>Skola</span>
+  <span class="sk-egg-mark">Skola</span>
   <span>
     <a class="on" href="./">Home</a>
     · <a href="explainer.html">How it works</a>
@@ -58,7 +58,8 @@
   <h2>What the <span data-noun="place">school</span> sees next</h2>
   <p class="lede" style="margin:0 0 12px">Every tap is one small colored square.
   Collect the whole class and you get a picture that reads in a second.
-  Below is a <strong>sample class</strong> — unlabeled tiles, invented names, not real ratings.
+  Below are <strong>sample schools</strong> — unlabeled tiles, invented names, not real ratings.
+  Each tile is a different school with its own staff. A school with no coat of arms gets a shield generated from its name.
   <a href="app.html">Full screen</a>.</p>
   <div id="skola"></div>
 </section>
@@ -74,11 +75,13 @@
   <a href="mailto:kontakt@weryta.pl">kontakt@weryta.pl</a>.
   Academic demo with US demonstration data: <a href="https://skola.weryta.com/">skola.weryta.com</a>.</p>
 </footer>
-<script src="../assets/skola.js?v=tiles2"></script>
+<script src="../assets/skola.js?v=tiles6"></script>
 <script src="../assets/site.js"></script>
 <script>
 Skola.guide(document.getElementById('skola-guide'), 'en');
 Skola.tiles(document.getElementById('skola'), { lang: 'en', assetBase: '../assets/' });
 </script>
+<!-- eggs off: ?eggs=0 (sticky in this browser). back on: ?eggs=1. or drop this tag. -->
+<script src="../assets/eggs.js?v=4"></script>
 </body>
 </html>
