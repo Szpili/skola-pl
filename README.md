@@ -22,3 +22,10 @@ deploy/push-skola-pl.sh
 ```
 
 Until a custom domain: `https://szpili.github.io/skola-pl/` and `https://szpili.github.io/skola-pl/en/`.
+
+## MySQL (Dan’s cPanel)
+
+Polish school votes: MySQL `szkola_pl` (not Dan’s US `skola`).
+API: `https://nerdwar.one/G0/api.php` (`?action=ping` → `{"ok":true}`).
+`rate.html` sets `window.SKOLA_API` to that URL. Password lives only in `G0/config.php` on the host.
+Schema and PHP: [`server/SETUP.md`](server/SETUP.md).
